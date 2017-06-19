@@ -1,0 +1,133 @@
+#
+# Simple database and stream protocol file for basic SCPI (IEEE488.2) commands
+#
+#
+# Short and long form of identification string
+#
+record(stringin, "$(P)$(R)IDN")
+{
+    field(DESC, "SCPI identification string")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getIDN(39) $(PORT) $(A)")
+    field(PINI, "YES")
+}
+
+record(bo, "$(P)$(R)RST")
+{
+    field(DESC, "SCPI Reset")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto cmd(*RST) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetI")
+{
+    field(DESC, "Fetching current...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getI $(PORT) $(A)")
+}
+
+record(ao, "$(P)$(R)SetI")
+{
+    field(DESC, "Setting current...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setI(0.0) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetV")
+{
+    field(DESC, "Fetching voltage...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getV $(PORT) $(A)")
+}
+
+record(ao, "$(P)$(R)SetV")
+{
+    field(DESC, "Setting voltage...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setV(0.0) $(PORT) $(A)")
+}
+
+record(bo, "$(P)$(R)SetDC")
+{
+    field(DESC, "Setting DC Output...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setDC(OFF) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetEffV")
+{
+    field(DESC, "Fetching effective output voltage...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getEffV $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetEffI")
+{
+    field(DESC, "Fetching effective output current...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getEffV $(PORT) $(A)")
+}
+
+record(ao, "$(P)$(R)SetAveNum")
+{
+    field(DESC, "Setting nrecords...") #number of recordings for average calculation 1,2,4,8,16...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setAveNum(4) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetAveNum")
+{
+    field(DESC, "Getting nrecords...") #number of recordings for average calculation 1,2,4,8,16...")
+    field(DESC, "Fetching effective output current...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getAveNum $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetVERS")
+{
+    field(DESC, "Getting digital interface version...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getVersion $(PORT) $(A)")
+}
+
+record(ao, "$(P)$(R)SetScaleV")
+{
+    field(DESC, "Setting digscaleV...") #Digital Interface scale according to unit nominal voltage...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setVScale(100) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetScaleV")
+{
+    field(DESC, "Getting digscaleV...") #Digital Interface scale according to unit nominal voltage...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getVScale $(PORT) $(A)")
+}
+
+record(ao, "$(P)$(R)SetScaleI")
+{
+    field(DESC, "Setting digscaleI...") #Digital Interface scale according to unit nominal current...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setIScale(0.0001) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetScaleI")
+{
+    field(DESC, "Setting digscaleI...") #Digital Interface scale according to unit nominal current...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getIScale $(PORT) $(A)")
+}
+
+record(ao, "$(P)$(R)SetScaleR")
+{
+    field(DESC, "Setting digscaleR...") #Digital Interface scale according to unit nominal internal resistance...")
+    field(DTYP, "stream")
+    field(OUT,  "@devHeinz.proto setRScale(0.001) $(PORT) $(A)")
+}
+
+record(ai, "$(P)$(R)GetScaleR")
+{
+    field(DESC, "Setting digscaleR...") #Digital Interface scale according to unit nominal internal resistance...")
+    field(DTYP, "stream")
+    field(INP,  "@devHeinz.proto getRScale $(PORT) $(A)")
+}

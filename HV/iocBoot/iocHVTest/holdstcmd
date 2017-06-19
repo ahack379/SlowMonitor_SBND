@@ -1,0 +1,32 @@
+#!../../bin/linux-x86_64/HVTest
+
+## You may have to change HVTest to something else
+## everywhere it appears in this file
+
+< envPaths
+
+# Allow PV name prefixes and serial port name to be set from environment 
+epicsEnvSet "P" "$(P=HV)" 
+epicsEnvSet "R" "$(R=Test)" 
+epicsEnvSet "TTY" "$(TTY=172.28.172.132:5065)" 
+
+# Changing the TTY IP and port, 110216
+# epicsEnvSet "TTY" "$(TTY=172.29.47.255:5065)" 
+
+## Register all support components 
+cd "${TOP}" 
+csEnvSet "STREAM_PROTOCOL_PATH" "$(TOP)/db" 
+
+dbLoadDatabase "dbd/HVTest.dbd" 
+HVTest_registerRecordDeviceDriver pdbbase
+
+# Set up ASYN ports 
+drvAsynIPPortConfigure("L0","$(TTY)",0,0,0)
+asynSetTraceMask("L0",-1,0x1) #1 reads out only error messages 
+
+## Load record instances 
+dbLoadRecords("db/devHeinz.db","P=$(P),R=$(R),PORT=L0,A=0") 
+
+## Start EPICS 
+cd "${TOP}/iocBoot/${IOC}" 
+iocInit 

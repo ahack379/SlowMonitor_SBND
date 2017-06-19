@@ -1,0 +1,6 @@
+epicsEnvSet("ARCH","linux-x86_64")
+epicsEnvSet("IOC","iocHVTest")
+epicsEnvSet("TOP","/home/lab324/EPICS/base-3.14.12.5/HV")
+epicsEnvSet("ASYN","/home/lab324/EPICS/base-3.14.12.5/modules/asyn4-29")
+epicsEnvSet("STREAM","/home/lab324/EPICS/base-3.14.12.5/HV/StreamDevice-2-6")
+epicsEnvSet("EPICS_BASE","/home/lab324/EPICS/base-3.14.12.5")

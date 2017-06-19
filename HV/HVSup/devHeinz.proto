@@ -1,0 +1,101 @@
+Terminator = LF;
+
+#setLocRem {
+#  out "SYST:%{LOC|REM}";;
+#}
+#setD {
+#    out "\$1 %d";
+#}
+#getD {
+#    out "\$1?";
+#    in "%d";
+#    ExtraInput = Ignore;
+#}
+
+cmd {
+    out "\$1";
+}
+
+getI{
+  out "CURR?" ; in "%f" ;
+}
+
+setI{
+  out "CURR %f";
+  @init{ out "CURR?" ; in "%f" ; }
+}
+
+getV{
+  out "VOLT?" ; in "%f" ;
+}
+
+setV{
+  out "VOLT %f";
+  @init{ out "VOLT?" ; in "%f" ; }
+  }
+
+setDC{
+  out "OUTP:%{ON|OFF}";
+}
+
+# if unit-U_NOM < 100kV, voltage declared in V
+# else, voltage declared in kV
+getEffV{
+  out "MEAS:VOLT?"; in "%f" ;
+}
+
+# If unit-I_NOM < 1 A, curr declared mA
+# else, A
+getEffI{
+  out "MEAS:CURR?"; in "%f" ;
+}
+
+setAveNum{
+  out "AVER %f";
+}
+
+getAveNum{
+  out "AVER?"; in "%f";
+  }
+
+getVersion{
+  out "VERS?" ; in "%f" ;
+  }
+
+getIDN {
+  out "IDN?"; in "%\$1[^\r\n]";
+  ExtraInput = Ignore;
+}
+
+reset{
+  out "*RST" ;
+ }
+
+#scale digital-interface according to unit nominal voltage
+# ex CAL:VOLT 1000
+setVScale{
+  out "CAL:VOLT %f" ; 
+}
+
+getVScale{
+  out "CAL:VOLT?";
+  @init{ out "VOLT?" ; in "%f" ; }
+  }
+
+setIScale{
+  out "CAL:CURR %f" ; 
+}
+
+getIScale{
+  out "CAL:CURR?";
+  @init{ out "CURR?" ; in "%f" ; }
+  }
+
+setRScale{
+  out "CAL:RES %f" ; 
+}
+
+getRScale{
+  out "CAL:RES?";
+  @init{ out "RES?" ; in "%f" ; }
+  }
